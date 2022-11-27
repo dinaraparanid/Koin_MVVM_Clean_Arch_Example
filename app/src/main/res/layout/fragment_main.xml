@@ -46,7 +46,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:hint="@string/your_name"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:onTextChanged="@{(txt, start, before, cnt) -> view_model.presenter.onInputNameTextChanged(txt)}"/>
 
             <Button
                 android:id="@+id/confirm_name_button"
@@ -55,6 +56,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="@string/confirm"
+                android:enabled="@{view_model.presenter.isConfirmButtonActive}"
                 android:onClick="@{() -> view_model.onConfirmNameButtonPressed()}"/>
         </LinearLayout>
 
