@@ -12,8 +12,6 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val appModule = module {
-    factoryOf(::BasePresenter)
-
     viewModelOf(::MainFragmentViewModel)
 
     factory { (nameContainerText: String?) ->

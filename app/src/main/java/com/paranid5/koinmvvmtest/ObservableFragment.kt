@@ -24,7 +24,7 @@ abstract class ObservableFragment<P : BasePresenter, VM : ObservableViewModel<P>
         val state: StateFlow<Boolean>,
         val callback: suspend H.() -> Unit
     ) {
-        suspend fun invoke() {
+        suspend operator fun invoke() {
             state.collect { isChanged -> if (isChanged) callback(uiHandler) }
         }
     }
@@ -37,7 +37,7 @@ abstract class ObservableFragment<P : BasePresenter, VM : ObservableViewModel<P>
     private fun handleUIStatesChanges() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                stateChangesCallbacks.forEach { stateChangedCallback -> stateChangedCallback.invoke() }
+                stateChangesCallbacks.forEach { stateChangedCallback -> stateChangedCallback() }
             }
         }
     }
